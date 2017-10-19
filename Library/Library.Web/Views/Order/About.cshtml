@@ -1,0 +1,42 @@
+﻿@model Library.Domain.Entity.Book
+
+@{
+    ViewBag.Title = "О книге";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="panel">
+    <div class="panel-heading">
+        <h3> «@Model.Name»</h3>
+    </div>
+
+    @using (Html.BeginForm("About",
+        FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="panel-body">
+            @Html.HiddenFor(m => m.BookId)
+            @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                <tr>
+                    <td class="text-right">@item.BookId</td>
+                    <td class="text-right">@item.Name</td>
+                    <td class="text-right">@item.Author</td>
+                    <td class="text-right">@item.Publishing</td>
+                    <td class="text-right">@item.Year</td>
+
+                    <td class="text-right">@item.Description</td>
+                    <td class="text-right">@item.Category</td>
+                    <td class="text-center">
+                       
+                </tr>
+            }
+                </div>
+        <div class="panel-footer">
+
+            @Html.ActionLink("Назад к списку", "Index", null, new
+            {
+                @class = "btn btn-default"
+            })
+        </div>
+    }
+</div>

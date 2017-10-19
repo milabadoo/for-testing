@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[Table] (
+	[BookID] INT NOT NULL PRIMARY KEY IDENTITY,
+	[Name] NVARCHAR(100) NOT NULL,
+	[Author] NVARCHAR(100) NOT NULL,
+	[Publishing] NVARCHAR(100) NOT NULL,
+	[Year] INT  NOT NULL,
+	[Image] NVARCHAR(100) NOT NULL,
+	[Rating] INT NOT NULL,
+	[Description] NVARCHAR(500) NOT NULL,
+	[Category] NVARCHAR(50) NOT NULL,
+
+);
+

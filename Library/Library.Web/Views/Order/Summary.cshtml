@@ -1,0 +1,12 @@
+﻿@model Library.Domain.Entity.Order
+
+<div class="navbar-right">
+    @Html.ActionLink("Заказать", "Index", "Order",
+    new { returnUrl = Request.Url.PathAndQuery },
+    new { @class = "btn btn-default navbar-btn" })
+</div>
+
+<div class="navbar-text navbar-right">
+    <b>Ваш заказ:</b>
+    @Model.LineCollection.Sum(x => x.Quantity) книг. Вы сможете забрать его в течении 2 рабочих дней.
+</div>

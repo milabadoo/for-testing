@@ -1,0 +1,24 @@
+﻿@using Library.Web.HtmlHelpers
+@using Library.Web.Models
+@model  BooksListViewModel
+
+
+@{
+    ViewBag.Title = "Книги";
+}
+
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+@foreach (var p in @Model.Books)
+{
+    @Html.Partial("NumberOfBooks", p)
+}
+    
+<div class="btn-group pull-right">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List",
+        new { page = x, category = Model.CurrentCategory }))
+</div>
+
