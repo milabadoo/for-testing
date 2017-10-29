@@ -10,6 +10,7 @@ namespace Library.Domain.Entity
     {
         [Key]
         public int WorkerId { get; set; }
+
         public int Login { get; set; }
        
         public string Password { get; set; }

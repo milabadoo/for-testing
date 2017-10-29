@@ -176,6 +176,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="CodeCoverage.runsettings" />
     <None Include="Scripts\jquery-1.9.0-vsdoc.js" />
     <Content Include="Infrastructure\Concrete\ErrorStyles.css">
       <SubType>Code</SubType>
@@ -222,6 +223,9 @@
       <Project>{83fd147d-3080-4436-ba3b-78777b4ac792}</Project>
       <Name>Library.Domain</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\xunit.analyzers.0.7.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
