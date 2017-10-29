@@ -224,5 +224,89 @@ namespace Library.Tests
             result.Order.Should().Be(cart);
             result.ReturnUrl.Should().Be("myUrl");
         }
+
+        [Fact]
+        public void Cannot_Checkout_Empty_Cart()
+        {
+            // Организация - создание имитированного обработчика заказов
+            var mock = new Mock<IOrderProcessor>();
+
+            // Организация - создание пустой корзины
+            var cart = new Order();
+
+            // Организация - создание деталей о доставке
+            var shippingDetails = new Details();
+
+            // Организация - создание контроллера
+            var controller = new OrderController(null, mock.Object);
+
+            // Действие
+            ViewResult result = controller.Checkout(cart, shippingDetails);
+
+            // Утверждение — проверка, что заказ не был передан обработчику 
+            mock.Verify(m => m.ProcessOrder(It.IsAny<Order>(), It.IsAny<Details>()),
+                Times.Never());
+
+            // Утверждение — проверка, что метод вернул стандартное представление 
+            result.ViewName.Should().Be("");
+            // Утверждение - проверка, что-представлению передана неверная модель
+            result.ViewData.ModelState.IsValid.Should().Be(false);
+        }
+
+        [Fact]
+        public void Cannot_Checkout_Invalid_ShippingDetails()
+        {
+            // Организация - создание имитированного обработчика заказов
+            var mock = new Mock<IOrderProcessor>();
+
+            // Организация — создание корзины с элементом
+            var cart = new Order();
+            cart.AddItem(new Book(), 1);
+
+            // Организация — создание контроллера
+            var controller = new OrderController(null, mock.Object);
+
+            // Организация — добавление ошибки в модель
+            controller.ModelState.AddModelError("error", "error");
+
+            // Действие - попытка перехода к оплате
+            ViewResult result = controller.Checkout(cart, new Details());
+
+            // Утверждение - проверка, что заказ не передается обработчику
+            mock.Verify(m => m.ProcessOrder(It.IsAny<Order>(), It.IsAny<Details>()),
+                Times.Never());
+
+            // Утверждение - проверка, что метод вернул стандартное представление
+            result.ViewName.Should().Be("");
+
+            // Утверждение - проверка, что-представлению передана неверная модель
+            result.ViewData.ModelState.IsValid.Should().Be(false);
+        }
+
+        [Fact]
+        public void Can_Checkout_And_Submit_Order()
+        {
+            // Организация - создание имитированного обработчика заказов
+            var mock = new Mock<IOrderProcessor>();
+
+            // Организация — создание корзины с элементом
+            var cart = new Order();
+            cart.AddItem(new Book(), 1);
+
+            // Организация — создание контроллера
+            var controller = new OrderController(null, mock.Object);
+
+            // Действие - попытка перехода к оплате
+            ViewResult result = controller.Checkout(cart, new Details());
+
+            // Утверждение - проверка, что заказ передан обработчику
+            mock.Verify(m => m.ProcessOrder(It.IsAny<Order>(), It.IsAny<Details>()), Times.Once());
+
+            // Утверждение - проверка, что метод возвращает представление 
+            result.ViewName.Should().Be("Completed");
+
+            // Утверждение - проверка, что представлению передается допустимая модель
+            result.ViewData.ModelState.IsValid.Should().Be(true);
+        }
     }
 }
