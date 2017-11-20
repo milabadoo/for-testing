@@ -10,7 +10,7 @@ namespace Library.Domain.Entity
     {
         public Order()
         {
-            LineCollection = new List<OrderLine>();
+            LineCollection = new List<OrderLine>(); 
         }
 
         [Key]
