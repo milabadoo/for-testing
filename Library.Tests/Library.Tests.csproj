@@ -75,6 +75,9 @@
     <Reference Include="Moq.EntityFramework, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Moq.EntityFramework.1.0.10.0\lib\net452\Moq.EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Moq.EntityFramework, Version=1.0.10.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.EntityFramework.1.0.10.0\lib\net452\Moq.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
