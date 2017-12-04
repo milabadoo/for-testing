@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Library.Web.Infrastructure.Binders;
@@ -22,11 +21,11 @@ namespace Library.Web
         {
             AreaRegistration.RegisterAllAreas();
 
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.Add(typeof(Order), new OrderModelBinder());
-            Database.SetInitializer<EFDbContext>(new EFDbContextInitializer());
+            Database.SetInitializer(new EFDbContextInitializer());
         }
     }
 }
